@@ -1,9 +1,15 @@
 {
   "name": "vscode-bend",
-  "displayName": "Bend Language",
-  "description": "Comprehensive language support for Bend.",
+  "displayName": "Bend Language Support",
+  "description": "Community VS Code extension for the Bend programming language",
   "version": "0.1.0",
-  "publisher": "bend-lang",
+  "publisher": "dpuig",
+  "icon": "images/icon.jpg",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HigherOrderCO/Bend.git"
+  },
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -36,12 +42,12 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "Bend configuration",
+      "title": "%config.title%",
       "properties": {
         "bend.executablePath": {
           "type": "string",
           "default": "bend",
-          "description": "Path to the bend executable. Can be a full path or just 'bend' if it's in your PATH."
+          "description": "%config.executablePath.desc%"
         },
         "bend.defaultRunner": {
           "type": "string",
@@ -51,14 +57,14 @@
             "cu"
           ],
           "default": "c",
-          "description": "The default runner to use when executing Bend files (c = parallel CPU, rs = sequential CPU, cu = parallel GPU)."
+          "description": "%config.defaultRunner.desc%"
         }
       }
     },
     "commands": [
       {
         "command": "bend.runFile",
-        "title": "Bend: Run Current File",
+        "title": "%command.runFile.title%",
         "icon": "$(play)"
       }
     ],
@@ -87,7 +93,7 @@
     "package": "npm run bundle --production",
     "lint": "eslint \"src/**/*.ts\"",
     "format": "prettier --write \"src/**/*.ts\"",
-    "test": "node ./dist/test/runTest.js"
+    "test": "npm run compile && node ./out/test/runTest.js"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
@@ -96,8 +102,10 @@
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "@vscode/test-electron": "^2.3.9",
+    "@vscode/vsce": "^3.9.2",
     "esbuild": "^0.20.1",
     "eslint": "^8.56.0",
+    "glob": "^13.0.6",
     "mocha": "^10.3.0",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"

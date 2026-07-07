@@ -1,0 +1,6 @@
+{
+  "config.title": "Bend configuration",
+  "config.executablePath.desc": "Path to the bend executable. Can be a full path or just 'bend' if it's in your PATH.",
+  "config.defaultRunner.desc": "The default runner to use when executing Bend files (c = parallel CPU, rs = sequential CPU, cu = parallel GPU).",
+  "command.runFile.title": "Bend: Run Current File"
+}

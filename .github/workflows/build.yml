@@ -1,0 +1,45 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Run Linter
+      run: npm run lint
+
+    - name: Run Headless Tests
+      uses: coactions/setup-xvfb@v1
+      with:
+        run: npm run test
+
+    - name: Package VSIX
+      run: npx vsce package
+      if: runner.os == 'Linux'
+
+    - name: Upload VSIX Artifact
+      uses: actions/upload-artifact@v4
+      if: runner.os == 'Linux'
+      with:
+        name: vscode-bend-extension
+        path: "*.vsix"

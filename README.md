@@ -1,6 +1,6 @@
 # Bend Language Support for VS Code
 
-Official extension for the [Bend](https://github.com/HigherOrderCO/Bend) programming language.
+Community extension for the [Bend](https://github.com/HigherOrderCO/Bend) programming language.
 
 ## Features
 
