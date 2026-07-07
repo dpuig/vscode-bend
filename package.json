@@ -1,0 +1,111 @@
+{
+  "name": "vscode-bend",
+  "displayName": "Bend Language",
+  "description": "Comprehensive language support for Bend.",
+  "version": "0.1.0",
+  "publisher": "bend-lang",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Snippets"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "bend",
+        "aliases": [
+          "Bend",
+          "bend"
+        ],
+        "extensions": [
+          ".bend"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "bend",
+        "scopeName": "source.bend",
+        "path": "./syntaxes/bend.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Bend configuration",
+      "properties": {
+        "bend.executablePath": {
+          "type": "string",
+          "default": "bend",
+          "description": "Path to the bend executable. Can be a full path or just 'bend' if it's in your PATH."
+        },
+        "bend.defaultRunner": {
+          "type": "string",
+          "enum": [
+            "c",
+            "rs",
+            "cu"
+          ],
+          "default": "c",
+          "description": "The default runner to use when executing Bend files (c = parallel CPU, rs = sequential CPU, cu = parallel GPU)."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "bend.runFile",
+        "title": "Bend: Run Current File",
+        "icon": "$(play)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "bend.runFile",
+          "when": "resourceExtname == .bend",
+          "group": "navigation"
+        }
+      ],
+      "editor/title/run": [
+        {
+          "command": "bend.runFile",
+          "when": "resourceExtname == .bend",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "tsc -p ./",
+    "watch": "node build/esbuild.js --watch",
+    "bundle": "node build/esbuild.js",
+    "package": "npm run bundle --production",
+    "lint": "eslint \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "node ./dist/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "@vscode/test-electron": "^2.3.9",
+    "esbuild": "^0.20.1",
+    "eslint": "^8.56.0",
+    "mocha": "^10.3.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^10.1.0",
+    "vscode-languageserver": "^10.1.0",
+    "vscode-languageserver-textdocument": "^1.0.13",
+    "vscode-uri": "^3.1.0"
+  }
+}
