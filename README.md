@@ -38,7 +38,7 @@ This extension contributes the following settings:
 
 This extension is open source. Pull requests are welcome!
 
-1. Clone the repository: `git clone https://github.com/HigherOrderCO/Bend.git` (Note: Update with actual community repo URL if forked).
+1. Clone the repository: `git clone https://github.com/dpuig/vscode-bend.git`.
 2. Install dependencies: `npm install`
 3. Press `F5` in VS Code to launch the Extension Development Host.
 
